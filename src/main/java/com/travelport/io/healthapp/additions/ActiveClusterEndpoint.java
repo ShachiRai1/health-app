@@ -16,6 +16,10 @@ public class ActiveClusterEndpoint {
 
     ActiveClusterEndpoint() {
         this.users.put("env", new User(""+System.getenv()));
+        this.users.put("HOSTNAME", new User(""+System.getProperty("HOSTNAME")));
+        this.users.put("OPENSHIFT_BUILD_COMMIT", new User(""+System.getProperty("OPENSHIFT_BUILD_COMMIT")));
+        this.users.put("HEALTH_APP_PORT", new User(""+System.getProperty("HEALTH_APP_PORT")));
+        this.users.put("KUBERNETES_PORT_53_UDP_ADDR", new User(""+System.getProperty("KUBERNETES_PORT_53_UDP_ADDR")));
         this.users.put("clusterId", new User(""+System.getProperty("clusterId")));
     }
 
