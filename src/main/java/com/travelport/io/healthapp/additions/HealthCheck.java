@@ -4,9 +4,12 @@ import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Component
 public class HealthCheck implements HealthIndicator {
-
+    SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyyy'T'HH:mm:ss.SSSZZZZ");
     @Override
     public Health health() {
         int errorCode = check(); // perform some specific health check
@@ -14,10 +17,10 @@ public class HealthCheck implements HealthIndicator {
             return Health.down()
                     .withDetail("Error Code", errorCode).build();
         }
-        System.out.println("*****************************");
-        System.out.println("system is up by Travelport health is call and System.getenv(): \\n"+System.getenv());
+        System.out.println("***************************** Date:"+dateFormat.format(new Date()));
+        System.out.println("System is up health was call and HEALTH_APP_PORT: \n"+System.getenv("HEALTH_APP_PORT")+"\n PID: \\n"+System.getenv("PID"));
         System.out.println("_______________________________");
-        return Health.up().build();
+        return Health.up().withDetail("DateNtime", ""+dateFormat.format(new Date())).build();
     }
 
     public int check() {
