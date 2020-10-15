@@ -1,4 +1,4 @@
-FROM dockerhub/tomcat:latest
+FROM openjdk:8-jre
 USER root
 LABEL maintainer="S R"
  
